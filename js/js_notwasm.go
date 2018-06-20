@@ -29,6 +29,8 @@ var (
 	Global    = Value{v: js.Global}
 )
 
+type M map[string]interface{}
+
 type Callback struct {
 	f     func([]Value)
 	flags EventCallbackFlag
@@ -179,4 +181,19 @@ func (v Value) SetIndex(i int, x interface{}) {
 
 func (v Value) String() string {
 	return v.v.String()
+}
+
+func (v Value) Interface() interface{} { return v.v.Interface() }
+
+// Keys returns the keys of the given JavaScript object.
+func Keys(o Value) []string {
+	if o == Null || o == Undefined {
+		return nil
+	}
+	a := Global.Get("Object").Call("keys", o)
+	s := make([]string, a.Length())
+	for i := 0; i < a.Length(); i++ {
+		s[i] = a.Index(i).String()
+	}
+	return s
 }

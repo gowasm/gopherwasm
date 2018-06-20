@@ -28,6 +28,8 @@ var (
 	Global    = js.Global
 )
 
+type M map[string]interface{}
+
 type Callback = js.Callback
 
 type EventCallbackFlag = js.EventCallbackFlag
@@ -91,4 +93,19 @@ func ValueOf(x interface{}) Value {
 	bh.Len = xh.Len * size
 	bh.Cap = xh.Cap * size
 	return js.ValueOf(b)
+}
+
+func (v Value) Interface() interface{} { return v.v.Interface() }
+
+// Keys returns the keys of the given JavaScript object.
+func Keys(o Value) []string {
+	if o == Null || o == Undefined {
+		return nil
+	}
+	a := Global.Get("Object").Call("keys", o)
+	s := make([]string, a.Length())
+	for i := 0; i < a.Length(); i++ {
+		s[i] = a.Index(i).String()
+	}
+	return s
 }
