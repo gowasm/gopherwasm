@@ -29,8 +29,6 @@ var (
 	Global    = Value{v: js.Global}
 )
 
-type M map[string]interface{}
-
 type Callback struct {
 	f     func([]Value)
 	flags EventCallbackFlag

@@ -28,8 +28,6 @@ var (
 	Global    = js.Global
 )
 
-type M map[string]interface{}
-
 type Callback = js.Callback
 
 type EventCallbackFlag = js.EventCallbackFlag
