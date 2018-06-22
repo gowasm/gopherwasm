@@ -93,7 +93,10 @@ func ValueOf(x interface{}) Value {
 	return js.ValueOf(b)
 }
 
-func (v Value) Interface() interface{} { return v.v.Interface() }
+func Interface(v js.Value) interface{} {
+	var x interface{}
+	return x
+}
 
 // Keys returns the keys of the given JavaScript object.
 func Keys(o Value) []string {
