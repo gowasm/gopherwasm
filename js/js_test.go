@@ -18,7 +18,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/hajimehoshi/gopherwasm/js"
+	"github.com/gowasm/gopherwasm/js"
 )
 
 func TestNull(t *testing.T) {
